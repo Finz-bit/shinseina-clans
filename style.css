@@ -40,3 +40,4 @@ label{display:block;font-size:.85rem;color:var(--silver);margin-top:8px}
 .tabs .on{background:var(--gold);color:#111}
 footer{text-align:center;padding:24px;color:var(--silver);font-size:.85rem}
 @media(prefers-reduced-motion:reduce){.pg.on{animation:none}}
+h1,h2,h3,.br{font-variant-ligatures:none;font-feature-settings:"liga" 0,"clig" 0,"calt" 0}
