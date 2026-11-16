@@ -1,0 +1,18 @@
+rules_version = '2';
+service cloud.firestore {
+ match /databases/{db}/documents {
+  function owner(){return request.auth != null && request.auth.uid == 'GANTI_DENGAN_UID_OWNER';}
+  match /site/{d}{allow read: if true; allow write: if owner();}
+  match /members/{d}{allow read: if true; allow write: if owner();}
+  match /private/{d}{allow read, write: if owner();}
+  match /memberRequests/{d}{
+   allow read, update, delete: if owner();
+   allow create: if request.resource.data.keys().hasOnly(['n','b','p','code'])
+    && request.resource.data.n is string && request.resource.data.n.size() > 0 && request.resource.data.n.size() <= 30
+    && request.resource.data.b is string && request.resource.data.b.size() <= 140
+    && request.resource.data.p is string
+    && (request.resource.data.p == '' || request.resource.data.p.matches('https://res\\.cloudinary\\.com/.*'))
+    && request.resource.data.code == get(/databases/$(db)/documents/private/invite).data.code;
+  }
+ }
+}
