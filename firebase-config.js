@@ -1,10 +1,8 @@
 import {initializeApp} from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
 import {getFirestore} from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 import {getAuth} from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
-// Isi dengan konfigurasi web app dari Firebase Console
-export const CFG={apiKey:'ISI_API_KEY',authDomain:'ISI.firebaseapp.com',projectId:'ISI_PROJECT_ID',appId:'ISI_APP_ID'};
-// Isi dengan data Cloudinary (preset harus bertipe Unsigned)
-export const CLOUD={name:'ISI_CLOUD_NAME',preset:'ISI_UPLOAD_PRESET'};
+export const CFG={apiKey:'AIzaSyAPv-2wBgN_unmMLvJbxYWCXjoD64UCoYw',authDomain:'shinseina-clans.firebaseapp.com',projectId:'shinseina-clans',appId:'1:532982627462:web:028097d6c755b56582e507'};
+export const CLOUD={name:'cpifpljs',preset:'shinseina_unsigned'};
 const app=initializeApp(CFG);
 export const db=getFirestore(app),auth=getAuth(app);
 export async function up(file){
