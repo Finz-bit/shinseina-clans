@@ -9,6 +9,7 @@ try{const s=await getDoc(doc(db,'site','content'));if(s.exists())C={...DEF,...s.
 document.title=C.title;
 const lg=C.logo||'logo.png';document.querySelectorAll('.lg').forEach(i=>i.src=lg);
 H('#tg',E(C.tagline));H('#ab',E(C.about));
+H('#ct',[['discord','Discord'],['wa','Grup WhatsApp']].filter(([k])=>/^https:\/\//.test(C[k]||'')).map(([k,l])=>`<a class="b" href="${E(C[k])}" target="_blank" rel="noopener">${l}</a>`).join(''));
 H('#hs',`<div class="tl">${C.history.map(h=>`<div class="c"><small>${E(h.d)}</small><h3>${E(h.t)}</h3><p>${E(h.x)}</p></div>`).join('')}</div>`);
 const R={};C.rules.forEach(r=>(R[r.c||'Lainnya']??=[]).push(r.x));
 H('#rl',Object.entries(R).map(([c,a])=>`<h3>${E(c)}</h3><div class="g">${a.map(x=>`<div class="c">${E(x)}</div>`).join('')}</div>`).join(''));

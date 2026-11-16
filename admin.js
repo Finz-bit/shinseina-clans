@@ -3,7 +3,7 @@ import {DEF} from './data.js';
 import {signInWithEmailAndPassword as si,onAuthStateChanged as oa,signOut} from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
 import {doc,getDoc,setDoc,collection,getDocs,addDoc,deleteDoc} from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 const $=s=>document.querySelector(s),E=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])),msg=t=>$('#ms').textContent=t;
-const S=[['title','Judul website'],['tagline','Deskripsi beranda','t'],['about','Teks Tentang','t'],['logo','URL logo (kosong = logo bawaan)','i']];
+const S=[['title','Judul website'],['tagline','Deskripsi beranda','t'],['about','Teks Tentang','t'],['discord','Link Discord (diawali https://)'],['wa','Link grup WhatsApp (diawali https://)'],['logo','URL logo (kosong = logo bawaan)','i']];
 const L={history:[['d','Tanggal'],['t','Judul'],['x','Isi','t']],rules:[['c','Kategori'],['x','Aturan','t']],staff:[['r','Jabatan'],['n','Nama'],['p','Foto profil','i']],gallery:[['p','Foto','i'],['t','Judul'],['x','Keterangan','t']]};
 const N={umum:'Umum',history:'Sejarah',rules:'Peraturan',staff:'Kepengurusan',gallery:'Galeri',anggota:'Anggota'};
 let C={...DEF},cur='umum',RQ={};
