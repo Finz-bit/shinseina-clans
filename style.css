@@ -117,3 +117,7 @@ h1,h2,h3,.br{font-variant-ligatures:none;font-feature-settings:"liga" 0,"clig" 0
 .ajuan summary:after{content:"+";font-size:1.6rem;line-height:1;transition:transform .2s}
 .ajuan[open] summary:after{transform:rotate(45deg)}
 .ajuan>p{padding:0 16px 8px}.ajuan form{padding:0 16px 16px}
+
+*{font-variant-ligatures:none;font-feature-settings:"liga" 0,"clig" 0,"calt" 0}
+.st-c h3,.mc h3{font-family:Inter,system-ui,sans-serif;font-weight:700}
+.ajuan summary,.rn,.tile b,.gi-b b,.rl,.dt,.chips span{font-variant-ligatures:none;font-feature-settings:"liga" 0,"clig" 0,"calt" 0}
