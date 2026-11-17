@@ -13,9 +13,9 @@ const IC={discord:'<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="tru
 document.querySelectorAll('.ct').forEach(el=>el.innerHTML=[['discord','Discord'],['wa','Grup WhatsApp']].filter(([k])=>/^https:\/\//.test(C[k]||'')).map(([k,l])=>`<a class="b" href="${E(C[k])}" target="_blank" rel="noopener">${IC[k]}${l}</a>`).join(''));
 H('#hs',`<div class="tl">${C.history.map(h=>`<div class="ti"><span class="dot"></span><span class="dt">${E(h.d)}</span><div class="c"><h3>${E(h.t)}</h3><p>${E(h.x)}</p></div></div>`).join('')}</div>`);
 if('IntersectionObserver'in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});document.querySelectorAll('.ti').forEach(e=>{e.classList.add('rv');io.observe(e)})}
-const R={};C.rules.forEach(r=>(R[r.c||'Lainnya']??=[]).push(r.x));
-H('#rl',Object.entries(R).map(([c,a])=>`<h3>${E(c)}</h3><div class="g">${a.map(x=>`<div class="c">${E(x)}</div>`).join('')}</div>`).join(''));
-H('#st',`<div class="g">${C.staff.map(s=>`<div class="c ctr"><img class="av" src="${E(s.p||lg)}" alt=""><br><small>${E(s.r)}</small><h3>${s.n?E(s.n):'<i>Belum terisi</i>'}</h3></div>`).join('')}</div>`);
+let n=0;const R={};C.rules.forEach(r=>(R[r.c||'Lainnya']??=[]).push(r.x));
+H('#rl',Object.entries(R).map(([c,a])=>`<h3 class="rc">${E(c)}</h3><div class="rg">${a.map(x=>`<div class="rule"><span class="rn">${++n}</span><p>${E(x)}</p></div>`).join('')}</div>`).join(''));
+H('#st',`<div class="stg">${C.staff.map(s=>`<div class="c ctr st-c${s.n?'':' empty'}"><img class="av" src="${E(s.p||lg)}" alt=""><br><span class="rl">${E(s.r)}</span><h3>${s.n?E(s.n):'<i>Belum terisi</i>'}</h3></div>`).join('')}</div>`);
 H('#gl',C.gallery.length?`<div class="gal">${C.gallery.map((x,i)=>`<button class="gi-b" data-i="${i}" aria-label="Perbesar ${E(x.t)}"><img src="${E(x.p)}" alt="${E(x.t)}" loading="lazy"><span><b>${E(x.t)}</b></span></button>`).join('')}</div>`:'<p>Belum ada foto.</p>');
 let gi=0;const lb=$('#lb');
 const show=i=>{const n=C.gallery.length;gi=(i+n)%n;const x=C.gallery[gi];$('#li').src=x.p;$('#li').alt=x.t||'';$('#lt').textContent=x.t||'';$('#lc').textContent=x.x||'';lb.hidden=false;document.body.style.overflow='hidden'};
@@ -25,7 +25,7 @@ $('#lx').onclick=hide;$('#lp').onclick=()=>show(gi-1);$('#ln').onclick=()=>show(
 lb.addEventListener('click',e=>{if(e.target===lb)hide()});
 addEventListener('keydown',e=>{if(lb.hidden)return;if(e.key=='Escape')hide();if(e.key=='ArrowLeft')show(gi-1);if(e.key=='ArrowRight')show(gi+1)});
 let sx=0;lb.addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});lb.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-sx;if(Math.abs(d)>50)show(gi+(d<0?1:-1))});
-try{const m=await getDocs(collection(db,'members'));H('#mb',m.empty?'<p>Belum ada anggota.</p>':`<div class="g">${m.docs.map(d=>{const x=d.data();return `<div class="c ctr"><img class="av" src="${E(x.p||lg)}" alt=""><h3>${E(x.n)}</h3><small>${E(x.b)}</small></div>`}).join('')}</div>`)}catch(e){H('#mb','<p>Belum ada anggota.</p>')}
+try{const m=await getDocs(collection(db,'members'));H('#mb',m.empty?'<p>Belum ada anggota.</p>':`<div class="mg">${m.docs.map(d=>{const x=d.data();return `<div class="mc"><img class="av" src="${E(x.p||lg)}" alt=""><h3>${E(x.n)}</h3><small>${E(x.b)}</small></div>`}).join('')}</div>`)}catch(e){H('#mb','<p>Belum ada anggota.</p>')}
 $('#f').onsubmit=async e=>{e.preventDefault();const f=e.target,m=$('#fm'),b=f.querySelector('button');b.disabled=true;m.textContent='Mengirim...';
 try{const file=f.p.files[0],p=file?await up(file):'';await addDoc(collection(db,'memberRequests'),{n:f.n.value.trim(),b:f.b.value.trim(),p,code:f.code.value.trim()});f.reset();m.textContent='Terkirim. Profilmu tampil setelah disetujui owner.'}
 catch(x){m.textContent='Gagal mengirim. Periksa kode undangan, foto, dan koneksi.'}b.disabled=false};
