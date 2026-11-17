@@ -2,8 +2,8 @@ import {db,up} from './firebase-config.js';
 import {DEF} from './data.js';
 import {doc,getDoc,collection,getDocs,addDoc} from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 const $=s=>document.querySelector(s),E=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])),H=(s,h)=>$(s).innerHTML=h;
-const go=()=>{let h=location.hash.slice(1);const e=document.getElementById(h);if(!e||!e.classList.contains('pg'))h='beranda';document.querySelectorAll('.pg').forEach(p=>p.classList.toggle('on',p.id==h));$('#m').classList.remove('open');scrollTo(0,0)};
-addEventListener('hashchange',go);$('#hb').onclick=()=>$('#m').classList.toggle('open');go();
+const go=()=>{let h=location.hash.slice(1);const e=document.getElementById(h);if(!e||!e.classList.contains('pg'))h='beranda';document.querySelectorAll('.pg').forEach(p=>p.classList.toggle('on',p.id==h));$('#m').classList.remove('open');document.querySelectorAll('#m a').forEach(l=>l.classList.toggle('on',l.getAttribute('href')=='#'+h));scrollTo(0,0)};
+addEventListener('hashchange',go);document.addEventListener('click',e=>{if(!e.target.closest('#m,#hb'))$('#m').classList.remove('open')});$('#hb').onclick=()=>$('#m').classList.toggle('open');go();
 let C={...DEF};
 try{const s=await getDoc(doc(db,'site','content'));if(s.exists())C={...DEF,...s.data()}}catch(e){}
 document.title=C.title;
