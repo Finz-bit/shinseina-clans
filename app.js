@@ -15,7 +15,15 @@ H('#hs',`<div class="tl">${C.history.map(h=>`<div class="c"><small>${E(h.d)}</sm
 const R={};C.rules.forEach(r=>(R[r.c||'Lainnya']??=[]).push(r.x));
 H('#rl',Object.entries(R).map(([c,a])=>`<h3>${E(c)}</h3><div class="g">${a.map(x=>`<div class="c">${E(x)}</div>`).join('')}</div>`).join(''));
 H('#st',`<div class="g">${C.staff.map(s=>`<div class="c ctr"><img class="av" src="${E(s.p||lg)}" alt=""><br><small>${E(s.r)}</small><h3>${s.n?E(s.n):'<i>Belum terisi</i>'}</h3></div>`).join('')}</div>`);
-H('#gl',C.gallery.length?`<div class="g">${C.gallery.map(x=>`<div class="c"><img class="gi" src="${E(x.p)}" alt="${E(x.t)}"><h3>${E(x.t)}</h3><small>${E(x.x)}</small></div>`).join('')}</div>`:'<p>Belum ada foto.</p>');
+H('#gl',C.gallery.length?`<div class="gal">${C.gallery.map((x,i)=>`<button class="gi-b" data-i="${i}" aria-label="Perbesar ${E(x.t)}"><img src="${E(x.p)}" alt="${E(x.t)}" loading="lazy"><span><b>${E(x.t)}</b></span></button>`).join('')}</div>`:'<p>Belum ada foto.</p>');
+let gi=0;const lb=$('#lb');
+const show=i=>{const n=C.gallery.length;gi=(i+n)%n;const x=C.gallery[gi];$('#li').src=x.p;$('#li').alt=x.t||'';$('#lt').textContent=x.t||'';$('#lc').textContent=x.x||'';lb.hidden=false;document.body.style.overflow='hidden'};
+const hide=()=>{lb.hidden=true;document.body.style.overflow=''};
+$('#gl').addEventListener('click',e=>{const b=e.target.closest('[data-i]');if(b)show(+b.dataset.i)});
+$('#lx').onclick=hide;$('#lp').onclick=()=>show(gi-1);$('#ln').onclick=()=>show(gi+1);
+lb.addEventListener('click',e=>{if(e.target===lb)hide()});
+addEventListener('keydown',e=>{if(lb.hidden)return;if(e.key=='Escape')hide();if(e.key=='ArrowLeft')show(gi-1);if(e.key=='ArrowRight')show(gi+1)});
+let sx=0;lb.addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});lb.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-sx;if(Math.abs(d)>50)show(gi+(d<0?1:-1))});
 try{const m=await getDocs(collection(db,'members'));H('#mb',m.empty?'<p>Belum ada anggota.</p>':`<div class="g">${m.docs.map(d=>{const x=d.data();return `<div class="c ctr"><img class="av" src="${E(x.p||lg)}" alt=""><h3>${E(x.n)}</h3><small>${E(x.b)}</small></div>`}).join('')}</div>`)}catch(e){H('#mb','<p>Belum ada anggota.</p>')}
 $('#f').onsubmit=async e=>{e.preventDefault();const f=e.target,m=$('#fm'),b=f.querySelector('button');b.disabled=true;m.textContent='Mengirim...';
 try{const file=f.p.files[0],p=file?await up(file):'';await addDoc(collection(db,'memberRequests'),{n:f.n.value.trim(),b:f.b.value.trim(),p,code:f.code.value.trim()});f.reset();m.textContent='Terkirim. Profilmu tampil setelah disetujui owner.'}
