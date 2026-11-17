@@ -17,4 +17,5 @@ rules:[
 {c:'Komunitas',x:'Tidak menjelek-jelekkan nama Shinseina.'},
 {c:'Komunitas',x:'Diharapkan sering online di server.'}],
 staff:[{r:'Owner',n:'Rizz',p:''},{r:'Leader',n:'RizzZBeeee11',p:''},{r:'Wakil Leader',n:'',p:''},{r:'Officer',n:'',p:''}],
+locations:[{n:'Lokasi Bese',c:'',d:'',p:''},{n:'Lokasi Spawn',c:'',d:'',p:''},{n:'Lokasi Farm',c:'',d:'',p:''},{n:'Lokasi Exp',c:'',d:'',p:''}],
 gallery:[]};

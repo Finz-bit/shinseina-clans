@@ -4,8 +4,8 @@ import {signInWithEmailAndPassword as si,onAuthStateChanged as oa,signOut} from 
 import {doc,getDoc,setDoc,collection,getDocs,addDoc,deleteDoc} from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 const $=s=>document.querySelector(s),E=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])),msg=t=>$('#ms').textContent=t;
 const S=[['title','Judul website'],['tagline','Deskripsi beranda','t'],['about','Teks Tentang','t'],['discord','Link Discord (diawali https://)'],['wa','Link grup WhatsApp (diawali https://)'],['logo','URL logo (kosong = logo bawaan)','i']];
-const L={history:[['d','Tanggal'],['t','Judul'],['x','Isi','t']],rules:[['c','Kategori'],['x','Aturan','t']],staff:[['r','Jabatan'],['n','Nama'],['p','Foto profil','i']],gallery:[['p','Foto','i'],['t','Judul'],['x','Keterangan','t']]};
-const N={umum:'Umum',history:'Sejarah',rules:'Peraturan',staff:'Kepengurusan',gallery:'Galeri',anggota:'Anggota'};
+const L={history:[['d','Tanggal'],['t','Judul'],['x','Isi','t']],rules:[['c','Kategori'],['x','Aturan','t']],staff:[['r','Jabatan'],['n','Nama'],['p','Foto profil','i']],locations:[['n','Nama lokasi'],['c','Koordinat (contoh: X 100, Y 64, Z -250)'],['d','Keterangan','t'],['p','Foto (opsional)','i']],gallery:[['p','Foto','i'],['t','Judul'],['x','Keterangan','t']]};
+const N={umum:'Umum',history:'Sejarah',rules:'Peraturan',staff:'Kepengurusan',locations:'Lokasi',gallery:'Galeri',anggota:'Anggota'};
 let C={...DEF},cur='umum',RQ={};
 const fld=(k,l,t,v)=>`<label>${l}${t=='t'?`<textarea data-k="${k}" rows="3">${E(v)}</textarea>`:`<input data-k="${k}" value="${E(v)}">`}${t=='i'?'<input type="file" accept="image/*" class="up">':''}</label>`;
 const grab=()=>{if(!$('#sv'))return;if(cur=='umum')S.forEach(([k])=>C[k]=$(`[data-k=${k}]`).value);else C[cur]=[...document.querySelectorAll('.it')].map(e=>Object.fromEntries([...e.querySelectorAll('[data-k]')].map(i=>[i.dataset.k,i.value])))};
